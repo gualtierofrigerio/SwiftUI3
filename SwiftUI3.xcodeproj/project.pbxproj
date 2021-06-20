@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		254E67FA267F459D0069A419 /* TimelineTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E67F9267F459D0069A419 /* TimelineTestView.swift */; };
 		25ADD080267C964B00EB7D34 /* CanvasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ADD07F267C964B00EB7D34 /* CanvasViewModel.swift */; };
 		25BD6D8A267B893200FCC818 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD6D89267B893200FCC818 /* CanvasView.swift */; };
 		25BD6D8C267B8B8D00FCC818 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD6D8B267B8B8D00FCC818 /* ListView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		254E67F9267F459D0069A419 /* TimelineTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTestView.swift; sourceTree = "<group>"; };
 		25ADD07F267C964B00EB7D34 /* CanvasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewModel.swift; sourceTree = "<group>"; };
 		25BD6D89267B893200FCC818 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		25BD6D8B267B8B8D00FCC818 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				25DB7985267A5A6E002E0067 /* FocusView.swift */,
 				25BD6D8B267B8B8D00FCC818 /* ListView.swift */,
 				25F2DC36267CD3AD00A542E2 /* CustomImageView.swift */,
+				254E67F9267F459D0069A419 /* TimelineTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				25F2DC33267CC61C00A542E2 /* CustomShape.swift in Sources */,
 				25BD6D8E267B92F900FCC818 /* DataSource.swift in Sources */,
 				25DB797A267A5993002E0067 /* ContentView.swift in Sources */,
+				254E67FA267F459D0069A419 /* TimelineTestView.swift in Sources */,
 				25ADD080267C964B00EB7D34 /* CanvasViewModel.swift in Sources */,
 				25BD6D90267B931E00FCC818 /* RESTClient.swift in Sources */,
 				25DB7978267A5993002E0067 /* SwiftUI3App.swift in Sources */,

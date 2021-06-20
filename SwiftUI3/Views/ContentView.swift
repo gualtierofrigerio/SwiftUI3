@@ -13,13 +13,16 @@ struct ContentView: View {
             VStack {
                 NavigationLink(destination: FocusView()) {
                     Text("Focus")
-                }
+                }.padding()
                 NavigationLink(destination: ListView()) {
                     Text("List View")
-                }
+                }.padding()
                 NavigationLink(destination: CanvasView(viewModel: CanvasViewModel())) {
                     Text("Canvas")
-                }
+                }.padding()
+                NavigationLink(destination: TimelineTestView()) {
+                    Text("Timeline")
+                }.padding()
             }
         }
     }
