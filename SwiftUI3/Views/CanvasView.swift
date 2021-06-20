@@ -15,7 +15,9 @@ struct CanvasView: View {
             viewModel.size = size
             let frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             for shape in viewModel.shapes {
-                context.stroke(shape.path(in: frame), with: .color(.primary), lineWidth: 5.0)
+                context.stroke(shape.path(in: frame),
+                               with: .color(.primary),
+                               lineWidth: 5.0)
             }
         }
         .gesture(DragGesture(coordinateSpace:.local).onChanged( { value in
@@ -34,6 +36,9 @@ struct CanvasView: View {
         // we skip a point if x or y are negative
         // or if they are bigger than the width/height
         // so we don't draw points outside the view
+        // I need to store size in the view model
+        // to avoid the warning
+        // Modifying state during view update, this will cause undefined behavior.
         if point.y < 0 ||
             point.y > size.height ||
             point.x < 0 ||
