@@ -9,8 +9,13 @@ import SwiftUI
 
 struct TimelineTestView: View {
     var body: some View {
-        TimelineView(.everyMinute) { context in
-            Text(context.date.formatted())
+        VStack {
+            TimelineView(.everyMinute) { context in
+                Text(context.date.formatted())
+            }.padding()
+            TimelineView(PeriodicTimelineSchedule(from: .now, by: 1.0)) { context in
+                Text(context.date.formatted(date: .omitted, time: .standard))
+            }
         }
     }
 }
