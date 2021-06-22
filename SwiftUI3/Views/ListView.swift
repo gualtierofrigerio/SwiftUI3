@@ -14,7 +14,8 @@ struct ListView: View {
         VStack {
             List(viewModel.beers) { beer in
                 HStack {
-                    CustomImageView(url: URL(string: beer.imageUrl))
+                    CustomImageView(url: URL(string: beer.imageUrl),
+                    placeHolder: Image(systemName: "xmark.octagon"))
                         .frame(width: 100, height: 100)
                     Text(beer.name)
                 }

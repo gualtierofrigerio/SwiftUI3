@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomImageView: View {
     var url: URL?
+    var placeHolder: Image?
     
     var body: some View {
         if let url = url {
@@ -39,9 +40,15 @@ struct CustomImageView: View {
         }
     }
     
+    @ViewBuilder
     private var emptyImage: some View {
-        Image(systemName: "xmark.octagon")
-            .font(.largeTitle)
+        if let placeHolder = placeHolder {
+            placeHolder
+        }
+        else {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.largeTitle)
+        }
     }
 }
 
