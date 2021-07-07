@@ -19,19 +19,24 @@ struct ClockView: View {
             VStack {
                 Text(context.date.formatted(date: .omitted, time: .standard))
                 ZStack {
-                    ClockHand(handScale: 0.5)
-                        .stroke(lineWidth: 5.0)
-                        .rotationEffect(angle(fromDate: context.date, type: .hour))
-                    ClockHand(handScale: 0.6)
-                        .stroke(lineWidth: 3.0)
-                        .rotationEffect(angle(fromDate: context.date, type: .minute))
-                    ClockHand(handScale: 0.8)
-                        .stroke(lineWidth: 1.0)
-                        .rotationEffect(angle(fromDate: context.date, type: .second))
+                    clockHands(date: context.date)
                 }
             }
             .frame(width: 300, height: 300)
         }
+    }
+    
+    @ViewBuilder
+    private func clockHands(date: Date) -> some View {
+        ClockHand(handScale: 0.5)
+            .stroke(lineWidth: 5.0)
+            .rotationEffect(angle(fromDate: date, type: .hour))
+        ClockHand(handScale: 0.6)
+            .stroke(lineWidth: 3.0)
+            .rotationEffect(angle(fromDate: date, type: .minute))
+        ClockHand(handScale: 0.8)
+            .stroke(lineWidth: 1.0)
+            .rotationEffect(angle(fromDate: date, type: .second))
     }
         
     private func angle(fromDate: Date, type: ClockHandType) -> Angle {
@@ -49,7 +54,6 @@ struct ClockView: View {
         }
         return Angle(degrees: timeDegree * 360.0 / 60.0)
     }
-    
 }
 
 struct ClockHand: Shape {
