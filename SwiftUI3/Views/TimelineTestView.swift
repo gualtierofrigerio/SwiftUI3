@@ -13,10 +13,21 @@ struct TimelineTestView: View {
             TimelineView(.everyMinute) { context in
                 Text(context.date.formatted())
             }.padding()
-            TimelineView(PeriodicTimelineSchedule(from: .now, by: 1.0)) { context in
+            TimelineView(.periodic(from: .now, by: 1.0)) { context in
+                Text(context.date.formatted(date: .omitted, time: .standard))
+            }.padding()
+            TimelineView(ExplicitTimelineSchedule(getDates())) { context in
                 Text(context.date.formatted(date: .omitted, time: .standard))
             }
         }
+    }
+    
+    private func getDates() -> [Date] {
+        let date = Date()
+        return [date,
+                date.addingTimeInterval(2.0),
+                date.addingTimeInterval(4.0),
+                date.addingTimeInterval(6.0)]
     }
 }
 
