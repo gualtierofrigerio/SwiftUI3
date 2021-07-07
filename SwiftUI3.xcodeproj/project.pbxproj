@@ -14,6 +14,7 @@
 		25BD6D8E267B92F900FCC818 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD6D8D267B92F900FCC818 /* DataSource.swift */; };
 		25BD6D90267B931E00FCC818 /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD6D8F267B931E00FCC818 /* RESTClient.swift */; };
 		25BD6D92267B98B200FCC818 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD6D91267B98B200FCC818 /* ListViewModel.swift */; };
+		25CC8F5F2695842B00DF5B83 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CC8F5E2695842B00DF5B83 /* ClockView.swift */; };
 		25DB7978267A5993002E0067 /* SwiftUI3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB7977267A5993002E0067 /* SwiftUI3App.swift */; };
 		25DB797A267A5993002E0067 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB7979267A5993002E0067 /* ContentView.swift */; };
 		25DB797C267A5995002E0067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25DB797B267A5995002E0067 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		25BD6D8D267B92F900FCC818 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		25BD6D8F267B931E00FCC818 /* RESTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		25BD6D91267B98B200FCC818 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		25CC8F5E2695842B00DF5B83 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		25DB7974267A5993002E0067 /* SwiftUI3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25DB7977267A5993002E0067 /* SwiftUI3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI3App.swift; sourceTree = "<group>"; };
 		25DB7979267A5993002E0067 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				25BD6D8B267B8B8D00FCC818 /* ListView.swift */,
 				25F2DC36267CD3AD00A542E2 /* CustomImageView.swift */,
 				254E67F9267F459D0069A419 /* TimelineTestView.swift */,
+				25CC8F5E2695842B00DF5B83 /* ClockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				25BD6D8C267B8B8D00FCC818 /* ListView.swift in Sources */,
 				25BD6D8A267B893200FCC818 /* CanvasView.swift in Sources */,
 				25BD6D92267B98B200FCC818 /* ListViewModel.swift in Sources */,
+				25CC8F5F2695842B00DF5B83 /* ClockView.swift in Sources */,
 				25F2DC37267CD3AD00A542E2 /* CustomImageView.swift in Sources */,
 				25DB7986267A5A6E002E0067 /* FocusView.swift in Sources */,
 			);
