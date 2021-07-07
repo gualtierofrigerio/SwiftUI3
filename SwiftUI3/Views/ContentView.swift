@@ -23,6 +23,9 @@ struct ContentView: View {
                 NavigationLink(destination: TimelineTestView()) {
                     Text("Timeline")
                 }.padding()
+                NavigationLink(destination: ClockView()) {
+                    Text("Clock")
+                }.padding()
             }
         }
     }
