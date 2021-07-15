@@ -16,7 +16,7 @@ struct TimelineTestView: View {
             TimelineView(.periodic(from: .now, by: 1.0)) { context in
                 Text(context.date.formatted(date: .omitted, time: .standard))
             }.padding()
-            TimelineView(ExplicitTimelineSchedule(getDates())) { context in
+            TimelineView(.explicit(getDates())) { context in
                 Text(context.date.formatted(date: .omitted, time: .standard))
             }
         }
