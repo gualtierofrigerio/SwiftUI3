@@ -7,13 +7,13 @@
 
 import SwiftUI
 
+enum ClockHandType {
+    case hour
+    case minute
+    case second
+}
+
 struct ClockView: View {
-    enum ClockHandType {
-        case hour
-        case minute
-        case second
-    }
-    
     var body: some View {
         TimelineView(.periodic(from: Date(), by: 1.0)) { context in
             VStack {
