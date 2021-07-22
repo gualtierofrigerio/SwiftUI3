@@ -20,19 +20,20 @@ struct ClockViewCanvas: View {
                                         width: 100,
                                         height: 100)
                 
+                var clockContext = context
+                clockContext.translateBy(x: (size.width / 2) - 50, y: (size.height / 2) - 50)
+                
+                addLabels(toContext: clockContext, frame: clockFrame)
+                
                 let hourPath = createPath(fromDate: date, type: .hour, frame: clockFrame)
-                context.stroke(hourPath, with: .color(Color.blue), lineWidth: 3.0)
+                clockContext.stroke(hourPath, with: .color(Color.blue), lineWidth: 3.0)
                 
                 let minutePath = createPath(fromDate: date, type: .minute, frame: clockFrame)
-                context.stroke(minutePath, with: .color(Color.blue), lineWidth: 2.0)
+                clockContext.stroke(minutePath, with: .color(Color.blue), lineWidth: 2.0)
                 
                 let secondPath = createPath(fromDate: date, type: .second, frame: clockFrame)
-                context.stroke(secondPath, with: .color(Color.red), lineWidth: 1.0)
+                clockContext.stroke(secondPath, with: .color(Color.red), lineWidth: 1.0)
                 
-                var clockContext = context
-                
-                clockContext.translateBy(x: (size.width / 2) - 50, y: (size.height / 2) - 50)
-                addLabels(toContext: clockContext, frame: clockFrame)
                 
                 /* uncomment to draw a cross centered to help alligning
                 var verticalPath = Path()
@@ -50,6 +51,7 @@ struct ClockViewCanvas: View {
     }
     
     private func addLabels(toContext context: GraphicsContext, frame: CGRect) {
+        // I use CGContext here just to demostrate we can use a CGConxtex inside a GraphicsContext
         context.withCGContext { cgContext in
             let rect = CGRect(x: -frame.size.width / 2,
                               y: -frame.size.width / 2,
@@ -80,26 +82,28 @@ struct ClockViewCanvas: View {
         var timeDegree = 0.0
         var widthScale = 1.0
         let calendar = Calendar.current
+        let midX = frame.size.width / 2 + (frame.origin.x / 2)
+        let midY = frame.size.height / 2 + (frame.origin.y / 2)
         
-        let radius = frame.size.width / 2
+        let radius = frame.size.width
         
         switch type {
         case .hour:
             // we have 12 hours so we need to multiply by 5 to have a scale of 60
             timeDegree = CGFloat(calendar.component(.hour, from: fromDate)) * 5
-            widthScale = 0.5
+            widthScale = 0.4
         case .minute:
             timeDegree = CGFloat(calendar.component(.minute, from: fromDate))
-            widthScale = 0.7
+            widthScale = 0.6
         case .second:
             timeDegree = CGFloat(calendar.component(.second, from: fromDate))
-            widthScale = 0.9
+            widthScale = 0.8
         }
-        timeDegree =  timeDegree * 6 * (CGFloat.pi / 180)
+        timeDegree =  -timeDegree * CGFloat.pi * 2 / 60 - (CGFloat.pi)
         
         let startPoint = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        let endX = (widthScale * radius) * sin(timeDegree) + 150
-        let endY = (widthScale * radius) * cos(timeDegree) + 150
+        let endX = (widthScale * radius) * sin(timeDegree) + midX
+        let endY = (widthScale * radius) * cos(timeDegree) + midY
         let endPoint = CGPoint(x: endX, y: endY)
         
         var path = Path()
