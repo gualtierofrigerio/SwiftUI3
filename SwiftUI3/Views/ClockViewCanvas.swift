@@ -25,27 +25,7 @@ struct ClockViewCanvas: View {
                 
                 addLabels(toContext: clockContext, frame: clockFrame)
                 
-                let hourPath = createPath(fromDate: date, type: .hour, frame: clockFrame)
-                clockContext.stroke(hourPath, with: .color(Color.blue), lineWidth: 3.0)
-                
-                let minutePath = createPath(fromDate: date, type: .minute, frame: clockFrame)
-                clockContext.stroke(minutePath, with: .color(Color.blue), lineWidth: 2.0)
-                
-                let secondPath = createPath(fromDate: date, type: .second, frame: clockFrame)
-                clockContext.stroke(secondPath, with: .color(Color.red), lineWidth: 1.0)
-                
-                
-                /* uncomment to draw a cross centered to help alligning
-                var verticalPath = Path()
-                verticalPath.move(to: CGPoint(x: size.width / 2, y: 0))
-                verticalPath.addLine(to: CGPoint(x: size.width / 2, y: size.height))
-                context.stroke(verticalPath, with: .color(Color.green), lineWidth: 1.0)
-                
-                var horizontalPath = Path()
-                horizontalPath.move(to: CGPoint(x: 0, y: size.height / 2))
-                horizontalPath.addLine(to: CGPoint(x: size.width, y: size.height / 2))
-                context.stroke(horizontalPath, with: .color(Color.green), lineWidth: 1.0)
-                */
+                drawClockHands(inContext: clockContext, frame: clockFrame, date: date)                
             }
         }
     }
@@ -81,24 +61,15 @@ struct ClockViewCanvas: View {
     private func createPath(fromDate: Date, type: ClockHandType, frame: CGRect) -> Path {
         var timeDegree = 0.0
         var widthScale = 1.0
-        let calendar = Calendar.current
         let midX = frame.size.width / 2 + (frame.origin.x / 2)
         let midY = frame.size.height / 2 + (frame.origin.y / 2)
         
         let radius = frame.size.width
         
-        switch type {
-        case .hour:
-            // we have 12 hours so we need to multiply by 5 to have a scale of 60
-            timeDegree = CGFloat(calendar.component(.hour, from: fromDate)) * 5
-            widthScale = 0.4
-        case .minute:
-            timeDegree = CGFloat(calendar.component(.minute, from: fromDate))
-            widthScale = 0.6
-        case .second:
-            timeDegree = CGFloat(calendar.component(.second, from: fromDate))
-            widthScale = 0.8
-        }
+        let (degree, scale) = getDegreeAndScale(fromDate: fromDate, type: type)
+        timeDegree = degree
+        widthScale = scale
+        
         timeDegree =  -timeDegree * CGFloat.pi * 2 / 60 - (CGFloat.pi)
         
         let startPoint = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
@@ -112,6 +83,17 @@ struct ClockViewCanvas: View {
         return path
     }
     
+    private func drawClockHands(inContext context: GraphicsContext, frame: CGRect, date: Date) {
+        let hourPath = createPath(fromDate: date, type: .hour, frame: frame)
+        context.stroke(hourPath, with: .color(Color.blue), lineWidth: 3.0)
+        
+        let minutePath = createPath(fromDate: date, type: .minute, frame: frame)
+        context.stroke(minutePath, with: .color(Color.blue), lineWidth: 2.0)
+        
+        let secondPath = createPath(fromDate: date, type: .second, frame: frame)
+        context.stroke(secondPath, with: .color(Color.red), lineWidth: 1.0)
+    }
+    
     private func getRect(fromRect rect: CGRect, ratio: CGFloat) -> CGRect {
         var newRect = rect
         newRect.size.width = newRect.size.width * ratio
@@ -119,6 +101,27 @@ struct ClockViewCanvas: View {
         newRect.origin.x = rect.size.width - newRect.size.width
         newRect.origin.y = rect.size.height - newRect.size.height
         return newRect
+    }
+    
+    private func getDegreeAndScale(fromDate: Date, type: ClockHandType) -> (CGFloat, CGFloat) {
+        let calendar = Calendar.current
+        var timeDegree = 0.0
+        var widthScale = 1.0
+        
+        switch type {
+        case .hour:
+            // we have 12 hours so we need to multiply by 5 to have a scale of 60
+            timeDegree = CGFloat(calendar.component(.hour, from: fromDate)) * 5
+            widthScale = 0.4
+        case .minute:
+            timeDegree = CGFloat(calendar.component(.minute, from: fromDate))
+            widthScale = 0.6
+        case .second:
+            timeDegree = CGFloat(calendar.component(.second, from: fromDate))
+            widthScale = 0.8
+        }
+        
+        return (timeDegree, widthScale)
     }
 }
 
