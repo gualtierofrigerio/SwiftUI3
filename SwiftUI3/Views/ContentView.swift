@@ -26,6 +26,9 @@ struct ContentView: View {
                 NavigationLink(destination: ClockView()) {
                     Text("Clock")
                 }.padding()
+                NavigationLink(destination: ClockViewCanvas()) {
+                    Text("Clock Canvas")
+                }.padding()
             }
         }
     }
