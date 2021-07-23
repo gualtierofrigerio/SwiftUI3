@@ -20,6 +20,9 @@ struct ContentView: View {
                 NavigationLink(destination: CanvasView(viewModel: CanvasViewModel())) {
                     Text("Canvas")
                 }.padding()
+                NavigationLink(destination: CanvasImage()) {
+                    Text("Canvas image")
+                }.padding()
                 NavigationLink(destination: TimelineTestView()) {
                     Text("Timeline")
                 }.padding()
