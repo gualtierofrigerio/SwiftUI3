@@ -30,8 +30,16 @@ struct ClockViewCanvas: View {
         }
     }
     
+    /// Add the clock marks inside a circle
+    /// - Parameters:
+    ///   - context: The GraphicsContext to draw into
+    ///   - frame: Surronding frame
     private func addLabels(toContext context: GraphicsContext, frame: CGRect) {
-        // I use CGContext here just to demostrate we can use a CGConxtex inside a GraphicsContext
+        /* I use CGContext here just to demostrate
+           we can use a CGConxtex inside a GraphicsContext
+           The CGContext draws a circle on screen and the clock hands
+           written by GraphicsContext will be inside it
+         */
         context.withCGContext { cgContext in
             let rect = CGRect(x: -frame.size.width / 2,
                               y: -frame.size.width / 2,
@@ -43,7 +51,7 @@ struct ClockViewCanvas: View {
             cgContext.addEllipse(in: rect)
             cgContext.drawPath(using: .fillStroke)
         }
-        
+        // write the marks inside a smaller frame to avoid collision with the circle
         let innerFrame = getRect(fromRect: frame, ratio: 0.9)
         let radius = innerFrame.size.width
         let midX = innerFrame.size.width / 2 + (innerFrame.origin.x / 2)
@@ -58,6 +66,12 @@ struct ClockViewCanvas: View {
         }
     }
     
+    /// Creates a Path to draw a clock hand
+    /// - Parameters:
+    ///   - fromDate: current Date
+    ///   - type: ClockHandType hours/minutes/seconds
+    ///   - frame: Surronding frame
+    /// - Returns: A Path describing a clock hand
     private func createPath(fromDate: Date, type: ClockHandType, frame: CGRect) -> Path {
         var timeDegree = 0.0
         var widthScale = 1.0
@@ -83,6 +97,11 @@ struct ClockViewCanvas: View {
         return path
     }
     
+    /// Draw the clock hands for hours, minutes and seconds
+    /// - Parameters:
+    ///   - context: The GraphicsContex to draw into
+    ///   - frame: Surronding frame
+    ///   - date: Current Date
     private func drawClockHands(inContext context: GraphicsContext, frame: CGRect, date: Date) {
         let hourPath = createPath(fromDate: date, type: .hour, frame: frame)
         context.stroke(hourPath, with: .color(Color.blue), lineWidth: 3.0)
@@ -94,15 +113,11 @@ struct ClockViewCanvas: View {
         context.stroke(secondPath, with: .color(Color.red), lineWidth: 1.0)
     }
     
-    private func getRect(fromRect rect: CGRect, ratio: CGFloat) -> CGRect {
-        var newRect = rect
-        newRect.size.width = newRect.size.width * ratio
-        newRect.size.height = newRect.size.height * ratio
-        newRect.origin.x = rect.size.width - newRect.size.width
-        newRect.origin.y = rect.size.height - newRect.size.height
-        return newRect
-    }
-    
+    /// Computes the angle of a clock hand and how long it is
+    /// - Parameters:
+    ///   - fromDate: Current Date
+    ///   - type: ClockHandType of the clock hand we want to calculate
+    /// - Returns: A tuple with the angle and the width of th clock hand
     private func getDegreeAndScale(fromDate: Date, type: ClockHandType) -> (CGFloat, CGFloat) {
         let calendar = Calendar.current
         var timeDegree = 0.0
@@ -122,6 +137,20 @@ struct ClockViewCanvas: View {
         }
         
         return (timeDegree, widthScale)
+    }
+    
+    /// Utility function to create a CGRect based on an existing one
+    /// - Parameters:
+    ///   - rect: The existing CGRect
+    ///   - ratio: Ratio of width and height of the resulting CGRect compared to the existing one
+    /// - Returns: A new CGRect obtained by applying ratio to the existin one
+    private func getRect(fromRect rect: CGRect, ratio: CGFloat) -> CGRect {
+        var newRect = rect
+        newRect.size.width = newRect.size.width * ratio
+        newRect.size.height = newRect.size.height * ratio
+        newRect.origin.x = rect.size.width - newRect.size.width
+        newRect.origin.y = rect.size.height - newRect.size.height
+        return newRect
     }
 }
 
