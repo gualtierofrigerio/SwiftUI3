@@ -17,6 +17,9 @@ struct ContentView: View {
                 NavigationLink(destination: ListView()) {
                     Text("List View")
                 }.padding()
+                NavigationLink(destination: RefreshableList()) {
+                    Text("Refreshable View")
+                }.padding()
                 NavigationLink(destination: CanvasView(viewModel: CanvasViewModel())) {
                     Text("Canvas")
                 }.padding()
